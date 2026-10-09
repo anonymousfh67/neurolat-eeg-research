@@ -6,7 +6,7 @@ Pipeline v3 : seuil M1 adaptatif (percentile 80) + règle de décision par ratio
 Adapté pour tourner en LOCAL (pas Colab) et pour être appelé par le
 frontend React/Next.js généré avec v0 (CORS activé).
 """
-
+from pathlib import Path
 import os, tempfile
 import numpy as np
 import torch, torch.nn as nn
@@ -20,7 +20,8 @@ mne.set_log_level("WARNING")
 # ════════════════════════════════════════════════════
 # CONFIGURATION — chemin LOCAL (pas Colab/Drive)
 # ════════════════════════════════════════════════════
-MODELS     = "./models"
+BASE_DIR = Path(__file__).resolve().parent
+MODELS = BASE_DIR / "models"
 FS         = 250
 WIN_SAMP   = 1000
 N_CANAUX   = 19
@@ -164,20 +165,20 @@ def charger_modeles():
     try:
         model_m1 = EEGConformer(n_classes=2).to(device)
         model_m1.load_state_dict(torch.load(
-            f"{MODELS}/model_m1_v2.pt", map_location=device))
+             MODELS/"model_m1_v2.pt", map_location=device))
         model_m1.eval()
         for p in model_m1.parameters(): p.requires_grad_(False)
 
         model_m2 = EEGConformer(n_classes=3).to(device)
         model_m2.load_state_dict(torch.load(
-            f"{MODELS}/model_m2_v3.pt", map_location=device))
+             MODELS/"model_m2_v3.pt", map_location=device))
         model_m2.eval()
         for p in model_m2.parameters(): p.requires_grad_(False)
 
-        mu1  = float(np.load(f"{MODELS}/mu1_v2.npy")[0])
-        std1 = float(np.load(f"{MODELS}/std1_v2.npy")[0])
-        mu2  = float(np.load(f"{MODELS}/mu2_v3.npy")[0])
-        std2 = float(np.load(f"{MODELS}/std2_v3.npy")[0])
+        mu1  = float(np.load(MODELS/"mu1_v2.npy")[0])
+        std1 = float(np.load(MODELS/"std1_v2.npy")[0])
+        mu2  = float(np.load(MODELS/"mu2_v3.npy")[0])
+        std2 = float(np.load(MODELS/"std2_v3.npy")[0])
         print(f"✅ Modèles chargés sur {device}")
         return True
     except Exception as e:
