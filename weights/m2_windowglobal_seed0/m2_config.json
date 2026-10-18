@@ -1,0 +1,86 @@
+{
+  "cache_dir": "/content/drive/MyDrive/projet_propre/cache",
+  "split_csv": "/content/drive/MyDrive/projet_propre/etape2a/split_patients.csv",
+  "out_dir": "/content/drive/MyDrive/projet_propre/m2_windowglobal_seed0",
+  "norm": "windowglobal",
+  "seed": 0,
+  "epochs": 40,
+  "steps_per_epoch": 300,
+  "batch": 64,
+  "patience": 8,
+  "lr": 0.0001,
+  "limit_per_role": null,
+  "flip": true,
+  "no_attn": false,
+  "smoke": false,
+  "selftest": false,
+  "torch": "2.11.0+cu130",
+  "best_epoch": 6,
+  "win": {
+    "acc": 0.7155619841742534,
+    "bacc": 0.747624793000614,
+    "bacc_pw": 0.6178803503922904,
+    "recall": [
+      0.8401711552982633,
+      0.8155867693701858,
+      0.5871164543333931
+    ],
+    "recall_pw": [
+      0.6267444735828714,
+      0.6639022538597216,
+      0.562994323734278
+    ],
+    "confusion": [
+      [
+        3338,
+        117,
+        518
+      ],
+      [
+        85,
+        1800,
+        322
+      ],
+      [
+        1605,
+        696,
+        3272
+      ]
+    ],
+    "n": 11753
+  },
+  "ev": {
+    "acc": 0.7784911717495987,
+    "bacc": 0.8233803496081977,
+    "bacc_pw": 0.6633112864346927,
+    "recall": [
+      0.9285714285714286,
+      0.896,
+      0.6455696202531646
+    ],
+    "recall_pw": [
+      0.6822864739115984,
+      0.6990740740740741,
+      0.6085733113184059
+    ],
+    "confusion": [
+      [
+        169,
+        1,
+        12
+      ],
+      [
+        3,
+        112,
+        10
+      ],
+      [
+        83,
+        29,
+        204
+      ]
+    ],
+    "n": 623
+  },
+  "majority_rate_events": 0.507223113964687
+}

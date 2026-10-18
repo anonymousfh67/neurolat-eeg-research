@@ -1,0 +1,9 @@
+{
+  "tau": 0.8,
+  "n_min": 1,
+  "smooth": 1,
+  "merge_gap_s": 6.0,
+  "val_F1": 0.6114457831325302,
+  "k_lat": null,
+  "m2key": "windowglobal"
+}

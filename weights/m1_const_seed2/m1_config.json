@@ -1,0 +1,29 @@
+{
+  "cache_dir": "/content/drive/MyDrive/projet_propre/cache",
+  "split_csv": "/content/drive/MyDrive/projet_propre/etape2a/split_patients.csv",
+  "out_dir": "/content/drive/MyDrive/projet_propre/m1_const_seed2",
+  "seed": 2,
+  "epochs": 40,
+  "steps_per_epoch": 300,
+  "batch": 64,
+  "patience": 8,
+  "lr": 0.0001,
+  "limit_per_role": null,
+  "flip": true,
+  "no_attn": false,
+  "norm": "const",
+  "smoke": false,
+  "selftest": false,
+  "torch": "2.11.0+cu130",
+  "numpy": "2.1.3",
+  "best_epoch": 20,
+  "n_train": 58978,
+  "n_val": 15666,
+  "best_val": {
+    "auc": 0.8605479696314413,
+    "auc_pw": 0.8471894394173045,
+    "sens_pw": 0.4017775669685093,
+    "spec_pw": 0.9456507167103749,
+    "bacc_pw": 0.6737141418394421
+  }
+}
