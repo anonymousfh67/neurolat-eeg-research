@@ -8,7 +8,7 @@ import { BrainVisualization } from '@/components/BrainVisualization'
 import { Timeline } from '@/components/Timeline'
 import { DetectionsTable } from '@/components/DetectionsTable'
 import { API_URL, FOCUS_FR, mmss, type AnalysisResult } from '@/lib/api'
-import { PERFORMANCE, SHORT_DISCLAIMER } from '@/lib/performance'
+import { SHORT_DISCLAIMER } from '@/lib/performance'
 
 type State = 'empty' | 'loading' | 'complete' | 'error'
 const BRAIN = { gauche: 'left', droite: 'right', bilateral: 'bilateral' } as const
@@ -194,7 +194,7 @@ ${rows.length ? rows.join('\n') : 'Aucune détection.'}
               <h3 className="text-xl font-semibold text-foreground">Détections</h3>
               <DetectionsTable detections={result.detections} />
               <p className="text-xs text-muted-foreground">
-                Une détection regroupe les fenêtres de 4 s dont p(crise) ≥ {result.rule.tau} séparées de moins de {result.rule.merge_gap_s} s. Son côté est la classe de plus forte probabilité moyenne de M2 sur ses fenêtres.
+                Une détection regroupe les fenêtres de 4 s dont p(crise) ≥ {result.rule.tau} séparées d&apos;au plus {result.rule.merge_gap_s} s. « Fenêtres ≥ seuil » compte ces fenêtres ; la durée va du début de la première à la fin de la dernière et peut donc inclure des fenêtres intermédiaires sous le seuil. Le côté prédit est la classe de plus forte probabilité moyenne de M2 sur les fenêtres de la détection.
                 Les probabilités sont des sorties de réseau, pas des mesures de confiance calibrées.
               </p>
             </section>
@@ -204,10 +204,6 @@ ${rows.length ? rows.join('\n') : 'Aucune détection.'}
               <div className="space-y-2">
                 <p className="font-semibold text-amber-900">Lecture des résultats</p>
                 <p className="text-sm text-amber-800">{SHORT_DISCLAIMER}</p>
-                <p className="text-sm text-amber-800">
-                  Sur l&apos;évaluation de référence ({PERFORMANCE.corpus}) : sensibilité de détection {PERFORMANCE.sensitivity}, {PERFORMANCE.falseAlarmsPerHour} fausses alarmes par heure ;
-                  latéralisation de bout en bout : exactitude équilibrée {PERFORMANCE.lateralizationBalancedAccuracy} (hasard {PERFORMANCE.lateralizationChance}).
-                </p>
               </div>
             </div>
 

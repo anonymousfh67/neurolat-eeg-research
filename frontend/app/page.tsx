@@ -1,7 +1,7 @@
 import { NavigationClient } from '@/components/NavigationClient'
 import Link from 'next/link'
 import { ArrowRight, Brain, Zap } from 'lucide-react'
-import { PERFORMANCE, SHORT_DISCLAIMER } from '@/lib/performance'
+import { SHORT_DISCLAIMER } from '@/lib/performance'
 
 export default function Home() {
   return (
@@ -18,7 +18,7 @@ export default function Home() {
                 Latéralisation EEG assistée par IA
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                NeuroLat détecte les crises dans un enregistrement EEG du corpus TUSZ et prédit, pour chaque détection, un côté : gauche, droit ou bilatéral. Les performances mesurées sont modestes et indiquées ci-dessous.
+                NeuroLat détecte les crises dans un enregistrement EEG du corpus TUSZ et prédit, pour chaque détection, un côté : gauche, droit ou bilatéral.
               </p>
             </div>
 
@@ -36,12 +36,12 @@ export default function Home() {
             {/* Trust Badges */}
             <div className="grid grid-cols-2 gap-6 pt-8 border-t border-border">
               <div>
-                <p className="text-2xl font-bold text-primary">{PERFORMANCE.sensitivity.split(' ')[0]}</p>
-                <p className="text-sm text-muted-foreground">Sensibilité de détection par crise ({PERFORMANCE.falseAlarmsPerHour.split(' ')[0]} fausses alarmes/h)</p>
+                <p className="text-2xl font-bold text-primary">M1</p>
+                <p className="text-sm text-muted-foreground">Détection des crises (3 réseaux)</p>
               </div>
               <div>
-                <p className="text-2xl font-bold text-primary">{PERFORMANCE.lateralizationBalancedAccuracy.split(' ')[0]}</p>
-                <p className="text-sm text-muted-foreground">Latéralisation de bout en bout, exactitude équilibrée (hasard {PERFORMANCE.lateralizationChance})</p>
+                <p className="text-2xl font-bold text-primary">M2</p>
+                <p className="text-sm text-muted-foreground">Côté prédit : gauche, droit ou bilatéral (3 réseaux)</p>
               </div>
               <div>
                 <p className="text-2xl font-bold text-primary">TUSZ</p>
@@ -210,9 +210,6 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
           <p className="font-semibold text-foreground">NeuroLat</p>
           <p className="text-sm text-muted-foreground">{SHORT_DISCLAIMER}</p>
-          <p className="text-xs text-muted-foreground">
-            Résultats de référence : {PERFORMANCE.corpus}. Sensibilité de détection {PERFORMANCE.sensitivity}, {PERFORMANCE.falseAlarmsPerHour} fausses alarmes par heure, précision {PERFORMANCE.precision} ; latéralisation de bout en bout : exactitude équilibrée {PERFORMANCE.lateralizationBalancedAccuracy}. Intervalles à 95 % (bootstrap par patient).
-          </p>
         </div>
       </footer>
     </main>

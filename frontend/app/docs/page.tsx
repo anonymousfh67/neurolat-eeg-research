@@ -3,7 +3,7 @@
 import Navigation from '@/components/Navigation'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
-import { PERFORMANCE, SHORT_DISCLAIMER } from '@/lib/performance'
+import { SHORT_DISCLAIMER } from '@/lib/performance'
 
 const steps = [
   ['Démarrer le serveur', 'Dans un terminal : « python app/server.py ». La pastille en haut à droite passe au vert quand le serveur répond.'],
@@ -16,7 +16,6 @@ const faq = [
   ['Quels fichiers sont acceptés ?', 'Des fichiers EDF au format du corpus TUSZ. Le signal est rééchantillonné à 250 Hz. Un enregistrement est refusé si moins de 16 des 18 dérivations bipolaires sont exploitables (signal absent ou écart-type hors de 1–500 µV).'],
   ['Que signifie « côté prédit » ?', 'Pour chaque détection, la classe (gauche, droit, bilatéral) de plus forte probabilité moyenne de M2 sur les fenêtres de la détection. Le résumé en haut de la page d’analyse est la plus forte probabilité moyenne sur toutes les fenêtres détectées ; quand les détections diffèrent, le tableau fait foi.'],
   ['Les probabilités sont-elles des niveaux de confiance ?', 'Non. Ce sont des sorties de réseau de neurones, non calibrées.'],
-  ['Quelle est la fiabilité ?', `Sur ${PERFORMANCE.corpus} : sensibilité de détection ${PERFORMANCE.sensitivity}, ${PERFORMANCE.falseAlarmsPerHour} fausses alarmes par heure ; latéralisation de bout en bout, exactitude équilibrée ${PERFORMANCE.lateralizationBalancedAccuracy} (hasard ${PERFORMANCE.lateralizationChance}).`],
   ['Que devient mon fichier ?', 'Il est écrit dans un fichier temporaire sur la machine du serveur, analysé, puis supprimé.'],
   ['Qui peut l’utiliser ?', 'Des chercheurs. Ce n’est pas un dispositif médical et il ne doit pas servir à un diagnostic ou à un traitement.'],
 ]

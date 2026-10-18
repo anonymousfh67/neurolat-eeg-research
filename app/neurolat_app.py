@@ -226,7 +226,7 @@ def selftest():
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--edf"); ap.add_argument("--weights", default=os.path.join(HERE, "weights"))
+    ap.add_argument("--edf"); ap.add_argument("--weights", default=os.path.join(HERE, "..", "weights"))
     ap.add_argument("--out", default="results"); ap.add_argument("--device", default="cpu"); ap.add_argument("--selftest", action="store_true")
     a = ap.parse_args()
     if a.selftest:

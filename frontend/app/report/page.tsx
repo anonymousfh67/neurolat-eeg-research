@@ -7,7 +7,7 @@ import { NavigationClient } from '@/components/NavigationClient'
 import { Timeline } from '@/components/Timeline'
 import { DetectionsTable } from '@/components/DetectionsTable'
 import { FOCUS_FR, mmss, type AnalysisResult } from '@/lib/api'
-import { PERFORMANCE, SHORT_DISCLAIMER } from '@/lib/performance'
+import { SHORT_DISCLAIMER } from '@/lib/performance'
 
 interface Stored {
   result: AnalysisResult
@@ -61,9 +61,6 @@ export default function ReportPage() {
         line(`${i + 1}. ${mmss(d.start_s)} - ${mmss(d.stop_s)} (${Math.round(d.duration_s)} s, ${d.n_windows} fenêtres) : ${FOCUS_FR[d.label]}  p(G/D/B) = ${d.p_left.toFixed(2)} / ${d.p_right.toFixed(2)} / ${d.p_bilateral.toFixed(2)}`)
       })
       if (!result.detections.length) line('Aucune détection.')
-      y += 3
-      line('Performances de référence', 12, true)
-      line(`${PERFORMANCE.corpus}. Sensibilité de détection ${PERFORMANCE.sensitivity} ; fausses alarmes par heure ${PERFORMANCE.falseAlarmsPerHour} ; précision ${PERFORMANCE.precision}. Latéralisation de bout en bout : exactitude équilibrée ${PERFORMANCE.lateralizationBalancedAccuracy} (hasard ${PERFORMANCE.lateralizationChance}) ; exactitude ${PERFORMANCE.lateralizationAccuracy}, inférieure au taux de la classe majoritaire (${PERFORMANCE.majorityRate}).`, 9)
       pdf.save(`rapport_neurolat_${fileInfo.name.replace(/\.edf$/i, '')}.pdf`)
     } catch (err) {
       console.error('Erreur génération PDF :', err)
@@ -149,25 +146,15 @@ export default function ReportPage() {
             <h2 className="text-lg font-semibold text-foreground mb-4">Méthode</h2>
             <ul className="text-sm text-foreground space-y-2 list-disc pl-5">
               <li>Prétraitement : 18 dérivations bipolaires, 250 Hz, filtre 0,5–70 Hz, coupe-bande 60 Hz ; enregistrement rejeté si moins de 16 dérivations valides.</li>
-              <li>Détection : M1 (EEGConformer, moyenne de 3 graines) ; fenêtre détectée si p(crise) ≥ {result.rule.tau} et non plate ; fenêtres séparées de moins de {result.rule.merge_gap_s} s fusionnées ; détection gardée si elle compte au moins {result.rule.n_min} fenêtre(s).</li>
+              <li>Détection : M1 (EEGConformer, moyenne de 3 graines) ; fenêtre détectée si p(crise) ≥ {result.rule.tau} et non plate ; fenêtres séparées d&apos;au plus {result.rule.merge_gap_s} s fusionnées ; détection gardée si elle compte au moins {result.rule.n_min} fenêtre(s).</li>
               <li>Côté : M2 (EEGConformer, moyenne de 3 graines) ; classe de plus forte probabilité moyenne sur les fenêtres de la détection.</li>
               <li>Règle de décision choisie sur les patients de validation, puis figée avant l&apos;évaluation.</li>
             </ul>
           </section>
 
-          <section className="bg-secondary rounded-lg p-6 border border-border print:bg-white">
-            <h2 className="text-lg font-semibold text-foreground mb-4">Performances de référence ({PERFORMANCE.corpus})</h2>
-            <div className="grid md:grid-cols-2 gap-4 text-sm">
-              <div><p className="text-xs text-muted-foreground uppercase font-semibold">Sensibilité de détection (par crise)</p><p>{PERFORMANCE.sensitivity}</p></div>
-              <div><p className="text-xs text-muted-foreground uppercase font-semibold">Fausses alarmes par heure</p><p>{PERFORMANCE.falseAlarmsPerHour}</p></div>
-              <div><p className="text-xs text-muted-foreground uppercase font-semibold">Précision de détection</p><p>{PERFORMANCE.precision}</p></div>
-              <div><p className="text-xs text-muted-foreground uppercase font-semibold">Latéralisation de bout en bout : exactitude équilibrée</p><p>{PERFORMANCE.lateralizationBalancedAccuracy} (hasard {PERFORMANCE.lateralizationChance})</p></div>
-            </div>
-            <p className="text-xs text-muted-foreground mt-4">
-              Intervalles à 95 % (bootstrap par patient). L&apos;exactitude simple de la latéralisation de bout en bout ({PERFORMANCE.lateralizationAccuracy}) est inférieure au taux de la classe majoritaire ({PERFORMANCE.majorityRate}) ; avec une détection parfaite, l&apos;exactitude équilibrée est {PERFORMANCE.oracleBalancedAccuracy}.
-              Les labels de référence viennent d&apos;une règle algorithmique sur les annotations par canal et n&apos;ont pas été relus par un clinicien.
-            </p>
-          </section>
+          <p className="text-xs text-muted-foreground">
+            Les labels de référence viennent d&apos;une règle algorithmique sur les annotations par canal et n&apos;ont pas été relus par un clinicien.
+          </p>
         </div>
       </div>
     </main>

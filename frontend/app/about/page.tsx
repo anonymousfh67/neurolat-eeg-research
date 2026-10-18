@@ -3,7 +3,7 @@
 import Navigation from '@/components/Navigation'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
-import { PERFORMANCE, SHORT_DISCLAIMER } from '@/lib/performance'
+import { SHORT_DISCLAIMER } from '@/lib/performance'
 
 export default function AboutPage() {
   return (
@@ -23,34 +23,6 @@ export default function AboutPage() {
           <h2 className="text-2xl font-semibold text-foreground">Objectif</h2>
           <p className="text-foreground leading-relaxed">
             NeuroLat accompagne un travail de recherche sur le corpus TUSZ v2.0.3 (Temple University Hospital EEG Seizure Corpus). Il détecte les crises dans un enregistrement EEG, puis prédit pour chaque détection un côté : gauche, droit ou bilatéral. Il applique exactement le pipeline évalué dans l&apos;article.
-          </p>
-        </div>
-
-        <div className="space-y-4 rounded-lg bg-secondary p-8">
-          <h2 className="text-2xl font-semibold text-foreground">Ce que valent les résultats</h2>
-          <p className="text-foreground leading-relaxed">
-            Évaluation sur {PERFORMANCE.corpus}, avec une règle de décision choisie sur les patients de validation puis figée avant l&apos;évaluation. Intervalles à 95 % (bootstrap par patient).
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="text-center p-4 rounded bg-background">
-              <div className="font-semibold text-primary text-lg">{PERFORMANCE.sensitivity}</div>
-              <div className="text-xs text-muted-foreground">Sensibilité de détection par crise</div>
-            </div>
-            <div className="text-center p-4 rounded bg-background">
-              <div className="font-semibold text-primary text-lg">{PERFORMANCE.falseAlarmsPerHour}</div>
-              <div className="text-xs text-muted-foreground">Fausses alarmes par heure</div>
-            </div>
-            <div className="text-center p-4 rounded bg-background">
-              <div className="font-semibold text-primary text-lg">{PERFORMANCE.precision}</div>
-              <div className="text-xs text-muted-foreground">Précision de détection</div>
-            </div>
-            <div className="text-center p-4 rounded bg-background">
-              <div className="font-semibold text-primary text-lg">{PERFORMANCE.lateralizationBalancedAccuracy}</div>
-              <div className="text-xs text-muted-foreground">Latéralisation de bout en bout, exactitude équilibrée (hasard {PERFORMANCE.lateralizationChance})</div>
-            </div>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            La détection est utilisable pour la recherche mais produit des fausses alarmes. La latéralisation de bout en bout reste faible : son exactitude simple ({PERFORMANCE.lateralizationAccuracy}) est inférieure au taux de la classe majoritaire ({PERFORMANCE.majorityRate}). Avec une détection parfaite, l&apos;exactitude équilibrée est {PERFORMANCE.oracleBalancedAccuracy}.
           </p>
         </div>
 

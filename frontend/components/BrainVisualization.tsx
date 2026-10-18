@@ -206,7 +206,7 @@ export function BrainVisualization({
         </div>
         {confidence && (
           <div className="text-xs text-muted-foreground">
-            Confiance: {(confidence * 100).toFixed(1)}%
+            Probabilité moyenne (non calibrée) : {(confidence * 100).toFixed(1)}%
           </div>
         )}
       </div>

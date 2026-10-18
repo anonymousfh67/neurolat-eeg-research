@@ -15,7 +15,7 @@ export function DetectionsTable({ detections }: { detections: Detection[] }) {
             <th className="py-2 px-3 font-semibold">Début</th>
             <th className="py-2 px-3 font-semibold">Fin</th>
             <th className="py-2 px-3 font-semibold">Durée (s)</th>
-            <th className="py-2 px-3 font-semibold">Fenêtres</th>
+            <th className="py-2 px-3 font-semibold">Fenêtres ≥ seuil</th>
             <th className="py-2 px-3 font-semibold">p(crise) max</th>
             <th className="py-2 px-3 font-semibold">Côté prédit</th>
             <th className="py-2 px-3 font-semibold">p(G) / p(D) / p(B)</th>
